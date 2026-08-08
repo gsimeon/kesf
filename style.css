@@ -1148,6 +1148,7 @@ textarea.form-control {
     align-items: flex-start;
     border-top: 1px solid var(--glass-border);
     backdrop-filter: blur(16px);
+    overflow-y: auto;
   }
   
   .nav-links.active {
@@ -1970,6 +1971,154 @@ textarea.form-control {
     max-width: 100%;
     box-shadow: none;
     border: none;
+  }
+}
+
+/* --- Additional Responsiveness & Mobile Optimizations --- */
+@media (max-width: 580px) {
+  .donation-modal {
+    padding: 30px 20px;
+    margin: 10px;
+    max-height: 95vh;
+  }
+
+  .donation-wizard-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .preset-amounts {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .preset-btn {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .currency-options {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .currency-btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    flex-grow: 1;
+  }
+
+  .credit-card-preview {
+    height: 160px;
+    padding: 16px;
+  }
+
+  .card-number-display {
+    font-size: 1.15rem;
+    margin: 10px 0;
+    letter-spacing: 0.1em;
+  }
+
+  .card-value-display {
+    font-size: 0.85rem;
+  }
+
+  .payment-tabs {
+    gap: 8px;
+  }
+
+  .payment-tab {
+    padding: 10px 6px;
+    font-size: 0.85rem;
+    gap: 4px;
+  }
+
+  .bank-meta-grid {
+    grid-template-columns: 100px 1fr;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+
+  .highlight-value {
+    padding: 4px 8px;
+  }
+
+  .crypto-address-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .crypto-text-details {
+    align-items: center;
+    width: 100%;
+  }
+
+  .crypto-addr-row {
+    max-width: 100%;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .virtual-receipt {
+    padding: 20px 16px;
+    margin-bottom: 20px;
+  }
+
+  .receipt-row {
+    font-size: 0.8rem;
+  }
+
+  .receipt-total {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .donation-modal {
+    padding: 24px 16px;
+  }
+
+  .donation-wizard-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .step-line {
+    width: 20px;
+  }
+
+  .credit-card-preview {
+    height: 140px;
+    padding: 12px;
+  }
+
+  .card-number-display {
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+  }
+
+  .card-chip {
+    width: 32px;
+    height: 24px;
+  }
+
+  .card-logo {
+    top: 16px;
+    right: 16px;
+    font-size: 1.1rem;
+  }
+
+  .card-label {
+    font-size: 0.6rem;
+  }
+
+  .card-value-display {
+    font-size: 0.75rem;
+  }
+
+  .payment-tabs {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 }
 
