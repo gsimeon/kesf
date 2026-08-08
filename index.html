@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kike Empowerment and Support Foundation (K.E.S.F) - A non-profit movement dedicated to humanitarian outreach, education support, youth empowerment, and healing the world.">
+  <title>Kike Empowerment and Support Foundation (K.E.S.F) | We Are Givers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Header / Navigation -->
+  <header class="header" id="header">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <div class="logo-icon">K</div>
+        <span>K.E.S.F</span>
+      </a>
+      
+      <nav class="nav-links" id="nav-links">
+        <a href="#" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About Us</a>
+        <a href="#objectives" class="nav-link">Objectives</a>
+        <a href="#outreach" class="nav-link">Our Outreach</a>
+        <a href="#get-involved" class="nav-link">Get Involved</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+          <!-- Sun Icon -->
+          <svg class="sun-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
+          </svg>
+          <!-- Moon Icon -->
+          <svg class="moon-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+        <button class="btn btn-primary donate-trigger" style="padding: 10px 24px; font-size: 0.9rem;">Donate Now</button>
+        
+        <button class="menu-btn" id="menu-btn" aria-label="Toggle Menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tagline">
+          <span></span> Kike Empowerment and Support Foundation
+        </div>
+        <h1 class="hero-title">
+          <span>Together, We</span>
+          <span class="text-gradient">Heal the World</span>
+        </h1>
+        <p class="hero-desc">
+          K.E.S.F is a sacrificial movement established to create a strategic approach to assist the less privileged, improve education, and promote benevolent support to make a real impact on society.
+        </p>
+        <div class="hero-buttons">
+          <a href="#get-involved" class="btn btn-primary">Join the Movement</a>
+          <a href="#about" class="btn btn-secondary">Learn More</a>
+        </div>
+      </div>
+      
+      <div class="hero-media">
+        <div class="hero-image-wrapper">
+          <img src="assets/hero-bg.png" alt="K.E.S.F Unity Image" id="hero-img">
+        </div>
+        
+        <!-- Floating Badges -->
+        <div class="floating-badge badge-1 glass-card">
+          <div class="badge-icon">❤</div>
+          <div class="badge-info">
+            <h4>We Are Givers</h4>
+            <p>Benevolent Support</p>
+          </div>
+        </div>
+        
+        <div class="floating-badge badge-2 glass-card">
+          <div class="badge-icon">🎓</div>
+          <div class="badge-info">
+            <h4>Empowerment</h4>
+            <p>Education & Skills</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-media reveal">
+          <div class="about-stats">
+            <div class="stat-card glass-card">
+              <span class="stat-number" data-target="1500">0</span>
+              <span class="stat-label">Lives Impacted</span>
+            </div>
+            <div class="stat-card glass-card">
+              <span class="stat-number" data-target="25">0</span>
+              <span class="stat-label">Outreach Projects</span>
+            </div>
+            <div class="stat-card glass-card">
+              <span class="stat-number" data-target="100">0</span>
+              <span class="stat-label">Youths Empowered</span>
+            </div>
+            <div class="stat-card glass-card">
+              <span class="stat-number" data-target="50">0</span>
+              <span class="stat-label">Volunteers</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-content reveal">
+          <div class="section-badge">Who We Are</div>
+          <h2 class="section-title">Our Story & <span class="text-gradient">Mission</span></h2>
+          <p class="about-text">
+            Kike Empowerment and Support Foundation (K.E.S.F) is a non-profit organization dedicated to serving humanity. We organize outreaches and strategic programs to empower individuals, foster educational and intellectual growth, and improve the general well-being of the less privileged.
+          </p>
+          
+          <div class="values-list">
+            <div class="value-item">
+              <div class="value-icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+                </svg>
+              </div>
+              <div class="value-text">
+                <h4>Sacrificial Giving</h4>
+                <p>We believe in selfless service and dedicating our resources to create immediate and lasting change in the lives of others.</p>
+              </div>
+            </div>
+            
+            <div class="value-item">
+              <div class="value-icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364.364l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 113.536 0V21h2v-5.455z"></path>
+                </svg>
+              </div>
+              <div class="value-text">
+                <h4>Intellectual & Skill Development</h4>
+                <p>We facilitate tutoring, support educational programs, and encourage trade/skill acquisition to achieve self-reliance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objectives Section -->
+  <section class="section" id="objectives" style="background-color: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">Our Blueprint</div>
+        <h2 class="section-title">Aims & <span class="text-gradient">Objectives</span></h2>
+        <p class="section-subtitle">
+          We operate with a clear strategic roadmap to address vulnerability, support community development, and promote equality.
+        </p>
+      </div>
+
+      <div class="objectives-grid reveal">
+        <!-- Objective 1 -->
+        <div class="objective-card glass-card">
+          <div class="objective-number">01</div>
+          <div class="objective-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="objective-title">Support the Less Privileged</h3>
+          <p class="objective-desc">Providing crucial resources, shelter support, clothing, and essential items to impoverished individuals and struggling communities.</p>
+        </div>
+
+        <!-- Objective 2 -->
+        <div class="objective-card glass-card">
+          <div class="objective-number">02</div>
+          <div class="objective-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V8a2 2 0 012-2h.08M9 20a11.5 11.5 0 00-1.097-4.111M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="objective-title">Humanitarian Outreaches</h3>
+          <p class="objective-desc">Organizing charitable activities, medical relief camps, and feeding drives designed for direct, grassroots societal development.</p>
+        </div>
+
+        <!-- Objective 3 -->
+        <div class="objective-card glass-card">
+          <div class="objective-number">03</div>
+          <div class="objective-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="objective-title">Educational Promotion</h3>
+          <p class="objective-desc">Championing educational growth, providing school fees support, textbooks, bags, and writing materials for children and youths.</p>
+        </div>
+
+        <!-- Objective 4 -->
+        <div class="objective-card glass-card">
+          <div class="objective-number">04</div>
+          <div class="objective-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="objective-title">Skill & Economic Support</h3>
+          <p class="objective-desc">Empowering youths and adults through skill acquisition, vocational training workshops, and small-scale business grants.</p>
+        </div>
+
+        <!-- Objective 5 -->
+        <div class="objective-card glass-card">
+          <div class="objective-number">05</div>
+          <div class="objective-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 class="objective-title font-title">Foster Love & Unity</h3>
+          <p class="objective-desc">Spreading kindness, love, and compassion to encourage unity and mutual respect across multi-cultural communities.</p>
+        </div>
+
+        <!-- Objective 6 -->
+        <div class="objective-card glass-card">
+          <div class="objective-number">06</div>
+          <div class="objective-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="objective-title">Recreational Programs</h3>
+          <p class="objective-desc">Supporting healthy activities and developmental sports programs to enhance the physical and mental well-being of young people.</p>
+        </div>
+
+        <!-- Objective 7 -->
+        <div class="objective-card glass-card">
+          <div class="objective-number">07</div>
+          <div class="objective-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+            </svg>
+          </div>
+          <h3 class="objective-title">Strategic Partnerships</h3>
+          <p class="objective-desc">Partnering with humanitarian organizations, corporate bodies, and individuals to scale support structures and maximize impact.</p>
+        </div>
+
+        <!-- Objective 8 -->
+        <div class="objective-card glass-card">
+          <div class="objective-number">08</div>
+          <div class="objective-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <h3 class="objective-title">Solely Non-Profit Focus</h3>
+          <p class="objective-desc">Ensuring all generated contributions directly benefit the outreach programs. Dedicated entirely to selfless giving and community service.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outreach Programs Section -->
+  <section class="section" id="outreach">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">Impact in Action</div>
+        <h2 class="section-title">Humanitarian <span class="text-gradient">Outreach</span></h2>
+        <p class="section-subtitle">
+          Explore our recent and upcoming programs aimed at bringing hope, feeding communities, and educating the next generation.
+        </p>
+      </div>
+
+      <div class="outreach-carousel reveal">
+        <div class="carousel-track" id="carousel-track">
+          <!-- Card 1 -->
+          <div class="carousel-slide">
+            <div class="outreach-card glass-card">
+              <div class="outreach-img">
+                <span class="outreach-tag">Education</span>
+                <!-- Background with CSS fallback gradient or placeholder image -->
+                <div style="width:100%; height:100%; background: linear-gradient(135deg, #1e1b4b, #311042); display:flex; align-items:center; justify-content:center; color: var(--primary); font-size:3rem;">📚</div>
+              </div>
+              <div class="outreach-body">
+                <h3 class="outreach-title">Back to School Campaign</h3>
+                <p class="outreach-desc">Distributing backpacks, stationery, textbooks, and paying tuition support for over 200 children in disadvantaged communities.</p>
+                <div class="outreach-meta">
+                  <span>Target: 500 Children</span>
+                  <span>July 2026</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="carousel-slide">
+            <div class="outreach-card glass-card">
+              <div class="outreach-img">
+                <span class="outreach-tag">Welfare</span>
+                <div style="width:100%; height:100%; background: linear-gradient(135deg, #022c22, #0d1e21); display:flex; align-items:center; justify-content:center; color: var(--accent); font-size:3rem;">🍲</div>
+              </div>
+              <div class="outreach-body">
+                <h3 class="outreach-title">Community Food Relief Drive</h3>
+                <p class="outreach-desc">Addressing urgent nutrition needs by supplying raw food packages and hot meals to elderly widows and underprivileged families.</p>
+                <div class="outreach-meta">
+                  <span>Target: 1,000 Families</span>
+                  <span>August 2026</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 3 -->
+          <div class="carousel-slide">
+            <div class="outreach-card glass-card">
+              <div class="outreach-img">
+                <span class="outreach-tag">Empowerment</span>
+                <div style="width:100%; height:100%; background: linear-gradient(135deg, #1e293b, #0f172a); display:flex; align-items:center; justify-content:center; color: var(--secondary); font-size:3rem;">🛠</div>
+              </div>
+              <div class="outreach-body">
+                <h3 class="outreach-title">Youth Skills Acquisition</h3>
+                <p class="outreach-desc">Sponsoring technical training workshops in tailoring, digital skills, and baking, providing start-up tools to graduates.</p>
+                <div class="outreach-meta">
+                  <span>Target: 50 Graduates</span>
+                  <span>September 2026</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Card 4 -->
+          <div class="carousel-slide">
+            <div class="outreach-card glass-card">
+              <div class="outreach-img">
+                <span class="outreach-tag">Healthcare</span>
+                <div style="width:100%; height:100%; background: linear-gradient(135deg, #311042, #1e293b); display:flex; align-items:center; justify-content:center; color: var(--primary); font-size:3rem;">🩺</div>
+              </div>
+              <div class="outreach-body">
+                <h3 class="outreach-title">Free Medical Outreach</h3>
+                <p class="outreach-desc">Partnering with volunteer doctors to provide general health check-ups, malaria treatments, and eye testing services.</p>
+                <div class="outreach-meta">
+                  <span>Target: 300 Patients</span>
+                  <span>October 2026</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Carousel Nav Controls -->
+        <div class="carousel-nav" id="carousel-nav">
+          <!-- Generated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get Involved & Volunteer Section -->
+  <section class="section" id="get-involved" style="background-color: var(--bg-secondary);">
+    <div class="container">
+      <div class="involved-grid">
+        <div class="involved-info reveal">
+          <div class="section-badge">Join the Movement</div>
+          <h2 class="section-title">Together, We Can <span class="text-gradient">Heal The World</span></h2>
+          <p class="about-text">
+            Every support counts. Whether you donate your time as a volunteer, fund an outreach, or partner with us strategically, you are making a difference in the lives of the less privileged.
+          </p>
+          
+          <div class="info-box">
+            <div class="info-icon">🤝</div>
+            <div class="info-details">
+              <h4>Become a Volunteer</h4>
+              <p>Work with us on the field during outreaches, help coordinate projects, or contribute your professional skills.</p>
+            </div>
+          </div>
+          
+          <div class="info-box">
+            <div class="info-icon">⭐</div>
+            <div class="info-details">
+              <h4>Make a Donation</h4>
+              <p>Sponsor education fees, support food drives, or provide economic support assets. Let's make an impact together.</p>
+              <button class="btn btn-primary donate-trigger" style="margin-top: 12px; padding: 8px 20px; font-size: 0.85rem;">Donate Online Now</button>
+            </div>
+          </div>
+          
+          <div class="glass-card" style="padding: 24px; border-left: 4px solid var(--accent);">
+            <h4 style="color: var(--accent); margin-bottom: 8px; font-weight: 700;">Account Details for Donations</h4>
+            <p style="font-size: 0.95rem; line-height: 1.5; color: var(--text-primary);">
+              <strong>Bank Name:</strong> GTBank / Mock Bank Limited<br>
+              <strong>Account Name:</strong> Kike Empowerment and Support Foundation<br>
+              <strong>Account Number:</strong> 0123456789 (Placeholder)<br>
+              <em style="font-size: 0.8rem; color: var(--text-secondary);">*Please include "DONATION - KESF" in your reference.</em>
+            </p>
+          </div>
+        </div>
+        
+        <!-- Form Panel -->
+        <div class="form-panel glass-card reveal">
+          <h3 class="form-title">Join K.E.S.F</h3>
+          <p class="form-subtitle">Fill in this form to sign up as a volunteer or request partnership details.</p>
+          
+          <form id="involvement-form" action="#" method="POST">
+            <div class="form-message" id="form-message"></div>
+            
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="role" class="form-label">How would you like to help?</label>
+              <select id="role" name="role" class="form-control" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="volunteer">Volunteer (Field Outreaches)</option>
+                <option value="skill-partner">Skill Acquisition Partner</option>
+                <option value="donor">Sponsor / Donor</option>
+                <option value="other">Other Inquiry</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message" class="form-label">Message / Tell us about yourself</label>
+              <textarea id="message" name="message" class="form-control" placeholder="Share your skills, how you'd like to support us..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Application</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <a href="#" class="logo">
+            <div class="logo-icon">K</div>
+            <span>K.E.S.F</span>
+          </a>
+          <p class="footer-tagline">
+            We encouragement, improve, and promote benevolence support, educational growth, social welfare, and economic development of everyone we cross paths with.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook">F</a>
+            <a href="#" class="social-btn" aria-label="Twitter">T</a>
+            <a href="#" class="social-btn" aria-label="Instagram">I</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">L</a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#objectives">Aims & Objectives</a></li>
+            <li><a href="#outreach">Outreach Campaigns</a></li>
+            <li><a href="#get-involved">Get Involved</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="footer-title">Support</h4>
+          <ul class="footer-links">
+            <li><a href="#get-involved">Volunteer Signup</a></li>
+            <li><button class="footer-btn-link donate-trigger" style="background: none; border: none; padding: 0; color: var(--text-secondary); cursor: pointer; text-align: left; transition: color var(--transition-fast); font-family: inherit; font-size: 0.95rem; font-weight: inherit;">Online Donations</button></li>
+            <li><a href="#objectives">Partnerships</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="footer-title">Contact Us</h4>
+          <div class="footer-contact-item">
+            <span class="footer-contact-icon">📍</span>
+            <span>Kike Empowerment and Support Foundation Headquarters</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-icon">✉</span>
+            <span>info@kikefoundation.org (Placeholder)</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-icon">📞</span>
+            <span>+234 123 456 7890 (Placeholder)</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Kike Empowerment and Support Foundation (K.E.S.F). All Rights Reserved.</p>
+        <p>WE ARE GIVERS. Together, we heal the world 🌎🌍</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Donation Modal Hub -->
+  <div class="donation-overlay" id="donation-overlay">
+    <div class="donation-modal glass-card">
+      <button class="donation-close" id="donation-close" aria-label="Close Modal">&times;</button>
+      
+      <!-- Wizard Progress Header -->
+      <div class="donation-wizard-header">
+        <h3>Support K.E.S.F</h3>
+        <p>100% of your contributions go directly to outreaches.</p>
+        <div class="wizard-steps-indicator">
+          <div class="step-dot active" data-step="1"><span>1</span></div>
+          <div class="step-line"></div>
+          <div class="step-dot" data-step="2"><span>2</span></div>
+          <div class="step-line"></div>
+          <div class="step-dot" data-step="3"><span>3</span></div>
+          <div class="step-line"></div>
+          <div class="step-dot" data-step="4"><span>4</span></div>
+        </div>
+      </div>
+
+      <!-- Step 1: Amount & Currency Selection -->
+      <div class="wizard-step active" id="donate-step-1">
+        <h4 class="step-title">Choose Donation Amount</h4>
+        
+        <!-- Frequency selector -->
+        <div class="frequency-toggle">
+          <button class="freq-btn active" id="freq-one-time">One-Time</button>
+          <button class="freq-btn" id="freq-monthly">Monthly</button>
+        </div>
+
+        <!-- Currency Selector -->
+        <div class="currency-selector-container">
+          <label class="form-label">Select Currency</label>
+          <div class="currency-options">
+            <button class="currency-btn active" data-currency="USD" data-symbol="$">USD ($)</button>
+            <button class="currency-btn" data-currency="NGN" data-symbol="₦">NGN (₦)</button>
+            <button class="currency-btn" data-currency="EUR" data-symbol="€">EUR (€)</button>
+            <button class="currency-btn" data-currency="GBP" data-symbol="£">GBP (£)</button>
+          </div>
+        </div>
+
+        <!-- Preset Amounts -->
+        <div class="preset-amounts" id="preset-amounts">
+          <button class="preset-btn" data-amount="10">$10</button>
+          <button class="preset-btn active" data-amount="25">$25</button>
+          <button class="preset-btn" data-amount="50">$50</button>
+          <button class="preset-btn" data-amount="100">$100</button>
+        </div>
+
+        <!-- Custom Amount -->
+        <div class="form-group custom-amount-group">
+          <label for="custom-amount-input" class="form-label">Or Enter Custom Amount</label>
+          <div class="custom-amount-wrapper">
+            <span class="currency-symbol" id="current-currency-symbol">$</span>
+            <input type="number" id="custom-amount-input" class="form-control" placeholder="25.00" min="1">
+          </div>
+        </div>
+
+        <!-- Impact Description -->
+        <div class="donation-impact-box" id="donation-impact-box">
+          <div class="impact-icon">💡</div>
+          <p id="donation-impact-text">Your $25 donation provides writing materials and textbooks for a child.</p>
+        </div>
+
+        <div class="wizard-actions">
+          <div></div> <!-- Spacer -->
+          <button class="btn btn-primary" id="btn-next-1">Next Step &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Donor Info -->
+      <div class="wizard-step" id="donate-step-2">
+        <h4 class="step-title">Donor Information</h4>
+        
+        <div class="form-group">
+          <label for="donor-name" class="form-label">Full Name</label>
+          <input type="text" id="donor-name" class="form-control" placeholder="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="donor-email" class="form-label">Email Address</label>
+          <input type="email" id="donor-email" class="form-control" placeholder="john@example.com">
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-container">
+            <input type="checkbox" id="donor-anonymous">
+            <span class="checkmark"></span>
+            Make this donation anonymous
+          </label>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-container">
+            <input type="checkbox" id="donor-dedicated">
+            <span class="checkmark"></span>
+            Dedicate this donation in honor/memory of someone
+          </label>
+        </div>
+        
+        <div class="form-group" id="dedicated-name-group" style="display: none;">
+          <label for="donor-dedicated-name" class="form-label">Honoree's Full Name</label>
+          <input type="text" id="donor-dedicated-name" class="form-control" placeholder="Jane Doe">
+        </div>
+
+        <div class="wizard-actions">
+          <button class="btn btn-secondary" id="btn-prev-2">&larr; Back</button>
+          <button class="btn btn-primary" id="btn-next-2">Next Step &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment Method Selection -->
+      <div class="wizard-step" id="donate-step-3">
+        <h4 class="step-title">Select Payment Method</h4>
+
+        <!-- Method Tabs -->
+        <div class="payment-tabs">
+          <button class="payment-tab active" data-method="card">
+            <span>💳</span> Card
+          </button>
+          <button class="payment-tab" data-method="bank">
+            <span>🏦</span> Transfer
+          </button>
+          <button class="payment-tab" data-method="crypto">
+            <span>🪙</span> Crypto
+          </button>
+        </div>
+
+        <!-- Method Contents -->
+        <!-- Card Payment Content -->
+        <div class="payment-content active" id="payment-content-card">
+          <!-- Interactive Credit Card Preview -->
+          <div class="credit-card-preview" id="credit-card-preview">
+            <div class="card-chip"></div>
+            <div class="card-logo" id="card-logo">Visa</div>
+            <div class="card-number-display" id="card-number-display">•••• •••• •••• ••••</div>
+            <div class="card-row">
+              <div class="card-col">
+                <span class="card-label">Card Holder</span>
+                <span class="card-value-display" id="card-name-display">YOUR NAME</span>
+              </div>
+              <div class="card-col">
+                <span class="card-label">Expires</span>
+                <span class="card-value-display" id="card-expiry-display">MM/YY</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-form">
+            <div class="form-group">
+              <label for="card-number" class="form-label">Card Number</label>
+              <input type="text" id="card-number" class="form-control" placeholder="4111 1111 1111 1111" maxlength="19">
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="card-expiry" class="form-label">Expiration Date</label>
+                <input type="text" id="card-expiry" class="form-control" placeholder="MM/YY" maxlength="5">
+              </div>
+              <div class="form-group">
+                <label for="card-cvc" class="form-label">CVC / CVV</label>
+                <input type="password" id="card-cvc" class="form-control" placeholder="123" maxlength="4">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bank Transfer Content -->
+        <div class="payment-content" id="payment-content-bank">
+          <div class="bank-details-panel">
+            <p class="transfer-instructions">Please transfer the exact amount to the bank account below. We dynamically verify the reference code.</p>
+            
+            <div class="bank-meta-grid">
+              <div class="bank-meta-label">Bank Name:</div>
+              <div class="bank-meta-value">Sterling Bank / GTBank</div>
+              
+              <div class="bank-meta-label">Account Name:</div>
+              <div class="bank-meta-value">Kike Empowerment & Support Foundation</div>
+              
+              <div class="bank-meta-label">Account Number:</div>
+              <div class="bank-meta-value highlight-value">
+                <span id="bank-acc-num">0987654321</span>
+                <button class="copy-btn" data-copy-target="bank-acc-num" type="button" aria-label="Copy Account Number">📋</button>
+              </div>
+
+              <div class="bank-meta-label">Transfer Ref:</div>
+              <div class="bank-meta-value highlight-value">
+                <span id="bank-ref-code">KESF-XXXXXX</span>
+                <button class="copy-btn" data-copy-target="bank-ref-code" type="button" aria-label="Copy Reference">📋</button>
+              </div>
+            </div>
+            
+            <div class="transfer-warning-box">
+              ⚠️ Use the reference code above in your bank description to ensure automated validation.
+            </div>
+
+            <div class="verify-transfer-container">
+              <button type="button" class="btn btn-secondary" id="btn-verify-transfer" style="width: 100%;">I Have Made the Transfer</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crypto Content -->
+        <div class="payment-content" id="payment-content-crypto">
+          <div class="crypto-details-panel">
+            <div class="crypto-selector">
+              <button type="button" class="crypto-coin-btn active" data-coin="BTC">Bitcoin</button>
+              <button type="button" class="crypto-coin-btn" data-coin="ETH">Ethereum</button>
+              <button type="button" class="crypto-coin-btn" data-coin="USDT">USDT (TRC20)</button>
+            </div>
+
+            <div class="crypto-address-container">
+              <div class="crypto-qr" id="crypto-qr">
+                <svg viewBox="0 0 100 100" width="100" height="100">
+                  <rect width="100" height="100" fill="white"/>
+                  <rect x="10" y="10" width="20" height="20" fill="black"/>
+                  <rect x="15" y="15" width="10" height="10" fill="white"/>
+                  <rect x="70" y="10" width="20" height="20" fill="black"/>
+                  <rect x="75" y="15" width="10" height="10" fill="white"/>
+                  <rect x="10" y="70" width="20" height="20" fill="black"/>
+                  <rect x="15" y="75" width="10" height="10" fill="white"/>
+                  <rect x="40" y="40" width="20" height="20" fill="black"/>
+                  <rect x="50" y="70" width="15" height="15" fill="black"/>
+                  <rect x="70" y="50" width="15" height="15" fill="black"/>
+                </svg>
+              </div>
+              
+              <div class="crypto-text-details">
+                <span class="crypto-label">Send exactly:</span>
+                <span class="crypto-amount-calc" id="crypto-converted-amount">0.00052 BTC</span>
+                
+                <span class="crypto-label" style="margin-top: 10px;">Recipient Address:</span>
+                <div class="crypto-addr-row">
+                  <span class="crypto-address-text" id="crypto-address-val">bc1qxy2kgdygjrsqtzq5n0yrf2493p83kkfjhx0wlh</span>
+                  <button class="copy-btn" data-copy-target="crypto-address-val" type="button" aria-label="Copy Address">📋</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 20px;">
+              <label for="crypto-hash" class="form-label">Transaction Hash (TxID)</label>
+              <input type="text" id="crypto-hash" class="form-control" placeholder="Enter hash to verify payment">
+            </div>
+          </div>
+        </div>
+
+        <div class="donation-form-error" id="checkout-error" style="color: #ef4444; font-size: 0.9rem; margin-top: 15px; display: none;"></div>
+
+        <div class="wizard-actions" style="margin-top: 30px;">
+          <button class="btn btn-secondary" id="btn-prev-3">&larr; Back</button>
+          <button class="btn btn-primary" id="btn-submit-payment">Complete Donation</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Success & Dynamic Receipt -->
+      <div class="wizard-step" id="donate-step-4">
+        <div class="success-screen">
+          <div class="success-checkmark">
+            <div class="check-icon">
+              <span class="icon-line line-tip"></span>
+              <span class="icon-line line-long"></span>
+              <div class="icon-circle"></div>
+              <div class="icon-fix"></div>
+            </div>
+          </div>
+
+          <h3 class="success-title">Donation Completed!</h3>
+          <p class="success-desc">Thank you so much for your generosity. Your payment has been successfully processed, and your support helps us heal the world.</p>
+          
+          <!-- Virtual Printable Receipt -->
+          <div class="virtual-receipt" id="receipt-container">
+            <div class="receipt-header">
+              <h4>Kike Empowerment & Support Foundation</h4>
+              <p>Official Donation Receipt</p>
+            </div>
+            <div class="receipt-divider"></div>
+            <div class="receipt-row">
+              <span>Receipt Number:</span>
+              <strong id="receipt-num">KESF-REC-789012</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Date:</span>
+              <strong id="receipt-date">2026-08-08</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Donor Name:</span>
+              <strong id="receipt-donor">John Doe</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Payment Method:</span>
+              <strong id="receipt-method">Card (Visa)</strong>
+            </div>
+            <div class="receipt-row">
+              <span>Frequency:</span>
+              <strong id="receipt-freq">One-Time</strong>
+            </div>
+            <div class="receipt-divider"></div>
+            <div class="receipt-row receipt-total">
+              <span>Amount Received:</span>
+              <span id="receipt-amount">$25.00</span>
+            </div>
+            <div class="receipt-footer">
+              <p>Together, We Heal the World 🌎</p>
+              <p style="font-size: 0.75rem; margin-top: 5px; color: var(--text-muted);">This is a computer generated receipt. No physical signature required.</p>
+            </div>
+          </div>
+
+          <div class="receipt-actions">
+            <button type="button" class="btn btn-secondary" id="btn-print-receipt">
+              <span>🖨️</span> Print Receipt
+            </button>
+            <button type="button" class="btn btn-primary" id="btn-close-success">Done</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
