@@ -83,18 +83,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Count-up Animation for Stats ---
   const stats = document.querySelectorAll('.stat-number');
   const animateStats = (stat) => {
-    const target = parseInt(stat.getAttribute('data-target'), 10);
-    const speed = 150; // lower number = faster speed
-    const increment = Math.ceil(target / speed);
+    const rawTarget = stat.getAttribute('data-target');
+    if (!rawTarget || isNaN(parseInt(rawTarget, 10))) {
+      return;
+    }
+    const target = parseInt(rawTarget, 10);
+    const suffix = stat.getAttribute('data-suffix') || '+';
+    const prefix = stat.getAttribute('data-prefix') || '';
+    const speed = 50;
+    const increment = Math.max(1, Math.ceil(target / speed));
     
     let count = 0;
     const updateCount = () => {
       count += increment;
       if (count < target) {
-        stat.innerText = count + '+';
-        setTimeout(updateCount, 15);
+        stat.innerText = prefix + count + suffix;
+        setTimeout(updateCount, 20);
       } else {
-        stat.innerText = target.toLocaleString() + '+';
+        stat.innerText = prefix + target.toLocaleString() + suffix;
       }
     };
     
@@ -622,6 +628,40 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('crypto-address-val').innerText = cryptoAddresses[activeCoin];
   };
 
+  // GTBank official multi-currency accounts mapping
+  const gtBankAccounts = {
+    NGN: '3001351567',
+    USD: '3001351677',
+    GBP: '3001351581',
+    EUR: '3001351608'
+  };
+
+  const updateBankAccountDisplay = (curr) => {
+    const targetCurr = gtBankAccounts[curr] ? curr : 'NGN';
+    const accNum = gtBankAccounts[targetCurr];
+    const accElem = document.getElementById('bank-acc-num');
+    const tagElem = document.getElementById('bank-acc-curr-tag');
+    if (accElem) accElem.innerText = accNum;
+    if (tagElem) tagElem.innerText = targetCurr;
+
+    // Update active state on modal currency tabs
+    document.querySelectorAll('.modal-curr-tab').forEach(tab => {
+      if (tab.getAttribute('data-bank-curr') === targetCurr) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
+    });
+  };
+
+  // Modal currency switcher tab buttons
+  document.querySelectorAll('.modal-curr-tab').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      const curr = e.currentTarget.getAttribute('data-bank-curr');
+      updateBankAccountDisplay(curr);
+    });
+  });
+
   const prepareStep3Details = () => {
     // Generate Bank Ref code
     const randomChars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -629,26 +669,59 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < 6; i++) {
       randomRef += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
     }
-    document.getElementById('bank-ref-code').innerText = randomRef;
+    const bankRefElem = document.getElementById('bank-ref-code');
+    const warnRefElem = document.getElementById('warning-ref-code');
+    if (bankRefElem) bankRefElem.innerText = randomRef;
+    if (warnRefElem) warnRefElem.innerText = randomRef;
+
+    // Sync bank account with selected currency
+    updateBankAccountDisplay(selectedCurrency);
     
     // Update crypto rates
     updateCryptoValues();
   };
 
-  // Clipboard copy functions
+  // Enhanced Clipboard copy functions with fallback and visual feedback
+  const fallbackCopy = (text) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {}
+    document.body.removeChild(textarea);
+  };
+
   const copyButtons = document.querySelectorAll('.copy-btn');
   copyButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       const targetId = e.currentTarget.getAttribute('data-copy-target');
-      const textVal = document.getElementById(targetId).innerText;
+      const targetElem = document.getElementById(targetId);
+      if (!targetElem) return;
+      const textVal = targetElem.innerText.trim();
       
-      navigator.clipboard.writeText(textVal).then(() => {
-        const originalText = e.currentTarget.innerText;
-        e.currentTarget.innerText = '✔️';
+      const setCopied = () => {
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<span>✔️ Copied!</span>';
+        btn.classList.add('copied');
         setTimeout(() => {
-          e.currentTarget.innerText = originalText;
-        }, 1500);
-      });
+          btn.innerHTML = originalHTML;
+          btn.classList.remove('copied');
+        }, 1800);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textVal).then(setCopied).catch(() => {
+          fallbackCopy(textVal);
+          setCopied();
+        });
+      } else {
+        fallbackCopy(textVal);
+        setCopied();
+      }
     });
   });
 
@@ -755,4 +828,134 @@ document.addEventListener('DOMContentLoaded', () => {
   btnCloseSuccess.addEventListener('click', () => {
     closeDonationModal();
   });
+
+  // =========================================================================
+  // Image Lightbox System (Football Academy & Staff Team Gallery)
+  // =========================================================================
+  const lightboxOverlay = document.getElementById('lightbox-overlay');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+
+  let currentGalleryItems = [];
+  let currentImageIndex = 0;
+
+  const openLightbox = (items, index) => {
+    currentGalleryItems = items;
+    currentImageIndex = index;
+    updateLightboxContent();
+    lightboxOverlay.classList.add('active');
+    lightboxOverlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    lightboxOverlay.classList.remove('active');
+    lightboxOverlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  const updateLightboxContent = () => {
+    if (!currentGalleryItems || currentGalleryItems.length === 0) return;
+    const item = currentGalleryItems[currentImageIndex];
+    const src = item.getAttribute('data-src') || item.querySelector('img')?.src;
+    const caption = item.getAttribute('data-caption') || item.querySelector('img')?.alt || '';
+
+    lightboxImg.style.opacity = '0';
+    lightboxImg.style.transform = 'scale(0.95)';
+
+    setTimeout(() => {
+      lightboxImg.src = src;
+      lightboxCaption.innerHTML = `<strong>(${currentImageIndex + 1}/${currentGalleryItems.length})</strong> ${caption}`;
+      lightboxImg.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+      lightboxImg.style.opacity = '1';
+      lightboxImg.style.transform = 'scale(1)';
+    }, 120);
+
+    // Show/hide navigation if single item
+    if (currentGalleryItems.length <= 1) {
+      lightboxPrev.style.display = 'none';
+      lightboxNext.style.display = 'none';
+    } else {
+      lightboxPrev.style.display = 'flex';
+      lightboxNext.style.display = 'flex';
+    }
+  };
+
+  const showNextImage = () => {
+    if (currentGalleryItems.length <= 1) return;
+    currentImageIndex = (currentImageIndex + 1) % currentGalleryItems.length;
+    updateLightboxContent();
+  };
+
+  const showPrevImage = () => {
+    if (currentGalleryItems.length <= 1) return;
+    currentImageIndex = (currentImageIndex - 1 + currentGalleryItems.length) % currentGalleryItems.length;
+    updateLightboxContent();
+  };
+
+  // Register click listeners for academy gallery
+  const academyItems = Array.from(document.querySelectorAll('#academy-gallery .gallery-item'));
+  academyItems.forEach((item, idx) => {
+    item.addEventListener('click', () => {
+      openLightbox(academyItems, idx);
+    });
+  });
+
+  // Register click listeners for staff team pictures
+  const teamItems = Array.from(document.querySelectorAll('.team-img-wrapper'));
+  teamItems.forEach((item, idx) => {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => {
+      openLightbox(teamItems, idx);
+    });
+  });
+
+  // Lightbox controls
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxNext) lightboxNext.addEventListener('click', showNextImage);
+  if (lightboxPrev) lightboxPrev.addEventListener('click', showPrevImage);
+
+  // Close on backdrop click
+  if (lightboxOverlay) {
+    lightboxOverlay.addEventListener('click', (e) => {
+      if (e.target === lightboxOverlay || e.target.classList.contains('lightbox-content')) {
+        closeLightbox();
+      }
+    });
+  }
+
+  // Keyboard navigation for Lightbox
+  window.addEventListener('keydown', (e) => {
+    if (!lightboxOverlay || !lightboxOverlay.classList.contains('active')) return;
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === 'ArrowRight') {
+      showNextImage();
+    } else if (e.key === 'ArrowLeft') {
+      showPrevImage();
+    }
+  });
+
+  // Touch swipe support for Lightbox on mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+  if (lightboxOverlay) {
+    lightboxOverlay.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightboxOverlay.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 40) {
+        showNextImage();
+      }
+      if (touchEndX > touchStartX + 40) {
+        showPrevImage();
+      }
+    }, { passive: true });
+  }
 });
+
