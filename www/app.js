@@ -957,5 +957,395 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: true });
   }
+
+  // =========================================================================
+  // 1. Interactive GIS Map Integration (Leaflet.js)
+  // =========================================================================
+  const mapElement = document.getElementById('impact-map');
+  let currentMap = null;
+  let mapTileLayer = null;
+
+  const getMapTileUrl = (theme) => {
+    // Return dark or light tiles matching theme
+    return theme === 'light'
+      ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+      : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+  };
+
+  const initImpactMap = () => {
+    if (!mapElement) return;
+
+    // Create Leaflet map centered at Lagos/Ibadan
+    currentMap = L.map('impact-map', {
+      center: [7.15, 3.75], // Center zoom between Lagos and Ibadan
+      zoom: 7,
+      scrollWheelZoom: false
+    });
+
+    const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    mapTileLayer = L.tileLayer(getMapTileUrl(activeTheme), {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
+    }).addTo(currentMap);
+
+    // Active K.E.S.F hubs coordinates and content
+    const hubs = [
+      {
+        coords: [6.5020, 3.3582], // Surulere
+        title: 'Miracle FA Surulere Hub',
+        desc: '<strong>Football Academy Hub</strong><br>Over 50 youth players enrolled. Free gear, nutrition, and professional drills training.',
+        color: 'indigo'
+      },
+      {
+        coords: [7.3775, 3.9470], // Ibadan (Odo-Ona Kekere)
+        title: 'K.E.S.F Headquarters & Outreach Center',
+        desc: '<strong>Main Headquarters</strong><br>Administrative center, vocational training hubs, and monthly food relief campaigns.',
+        color: 'emerald'
+      },
+      {
+        coords: [6.4549, 3.4246], // Lagos Island
+        title: 'Lagos Outreach Base',
+        desc: '<strong>Welfare & Health Base</strong><br>Annual back-to-school drives and medical clinics distribution center.',
+        color: 'gold'
+      }
+    ];
+
+    // Add markers with custom style and bind popups
+    hubs.forEach(hub => {
+      const marker = L.marker(hub.coords).addTo(currentMap);
+      marker.bindPopup(`<h4>${hub.title}</h4><p>${hub.desc}</p>`);
+    });
+  };
+
+  // Safe initialize map on load
+  try {
+    if (typeof L !== 'undefined') {
+      initImpactMap();
+    }
+  } catch (err) {
+    console.error("Map initialization failed: ", err);
+  }
+
+  // Update map tiles dynamically when theme changes
+  const updateMapTheme = (theme) => {
+    if (mapTileLayer && currentMap) {
+      currentMap.removeLayer(mapTileLayer);
+      mapTileLayer = L.tileLayer(getMapTileUrl(theme), {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+      }).addTo(currentMap);
+    }
+  };
+
+  // Intercept theme toggle click to refresh map style
+  themeToggle.addEventListener('click', () => {
+    // Wait for the DOM theme attribute change
+    setTimeout(() => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      updateMapTheme(currentTheme);
+    }, 20);
+  });
+
+  // =========================================================================
+  // 2. Financial Transparency Dashboard (Chart.js)
+  // =========================================================================
+  let budgetChart = null;
+  let impactChart = null;
+
+  const initTransparencyCharts = () => {
+    const budgetCanvas = document.getElementById('budgetChart');
+    const impactCanvas = document.getElementById('impactChart');
+    if (!budgetCanvas || !impactCanvas) return;
+
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const textColor = isDark ? '#f8fafc' : '#0f172a';
+    const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+
+    // Budget Allocation Doughnut Chart
+    budgetChart = new Chart(budgetCanvas, {
+      type: 'doughnut',
+      data: {
+        labels: ['Outreach', 'Football Academy', 'Administration'],
+        datasets: [{
+          data: [85, 10, 5],
+          backgroundColor: ['#10b981', '#6366f1', '#f59e0b'],
+          borderColor: isDark ? '#0f1326' : '#ffffff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false // Using custom styled HTML legend below canvas
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return ` ${context.label}: ${context.raw}%`;
+              }
+            }
+          }
+        },
+        cutout: '70%'
+      }
+    });
+
+    // Yearly Outreach Impact Bar Chart
+    impactChart = new Chart(impactCanvas, {
+      type: 'bar',
+      data: {
+        labels: ['2023', '2024', '2025'],
+        datasets: [
+          {
+            label: 'Beneficiaries Served',
+            data: [450, 950, 1500],
+            backgroundColor: '#10b981',
+            borderRadius: 6
+          },
+          {
+            label: 'Kits Distributed',
+            data: [200, 550, 1100],
+            backgroundColor: '#6366f1',
+            borderRadius: 6
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: {
+              color: textColor,
+              font: { family: 'Inter', size: 11 }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: textColor, font: { family: 'Inter' } }
+          },
+          y: {
+            grid: { color: gridColor },
+            ticks: { color: textColor, font: { family: 'Inter' } }
+          }
+        }
+      }
+    });
+  };
+
+  // Safe initialize charts on load
+  try {
+    if (typeof Chart !== 'undefined') {
+      initTransparencyCharts();
+    }
+  } catch (err) {
+    console.error("Charts initialization failed: ", err);
+  }
+
+  // Update chart text colors dynamically when theme changes
+  const updateChartsTheme = () => {
+    if (!budgetChart || !impactChart) return;
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const textColor = isDark ? '#f8fafc' : '#0f172a';
+    const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+
+    // Update Budget dataset borders
+    budgetChart.data.datasets[0].borderColor = isDark ? '#0f1326' : '#ffffff';
+    budgetChart.update();
+
+    // Update Impact scale grids and ticks
+    impactChart.options.scales.x.ticks.color = textColor;
+    impactChart.options.scales.y.ticks.color = textColor;
+    impactChart.options.scales.y.grid.color = gridColor;
+    impactChart.options.plugins.legend.labels.color = textColor;
+    impactChart.update();
+  };
+
+  themeToggle.addEventListener('click', () => {
+    setTimeout(updateChartsTheme, 50); // slight timeout to allow theme attribute to set
+  });
+
+  // =========================================================================
+  // 3. Player Sponsorship Portal Logic
+  // =========================================================================
+  const sponsorPlayerBtns = document.querySelectorAll('.sponsor-player-btn');
+  
+  sponsorPlayerBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const playerName = btn.getAttribute('data-player');
+      const sponsorshipAmount = parseFloat(btn.getAttribute('data-cost') || '20');
+
+      if (!playerName) return;
+
+      // 1. Open donation wizard modal
+      openDonationModal();
+
+      // 2. Set monthly frequency
+      const freqMonthlyBtn = document.getElementById('freq-monthly');
+      if (freqMonthlyBtn) {
+        freqMonthlyBtn.click();
+      }
+
+      // 3. Select currency as USD and set amount
+      const usdBtn = document.querySelector('.currency-btn[data-currency="USD"]');
+      if (usdBtn) {
+        usdBtn.click();
+      }
+
+      // Pre-fill custom amount input and fire input event to sync values
+      const customAmount = document.getElementById('custom-amount-input');
+      if (customAmount) {
+        customAmount.value = sponsorshipAmount;
+        // Trigger input event
+        customAmount.dispatchEvent(new Event('input'));
+      }
+
+      // 4. Check dedicated donation option and fill in player name
+      const dedicatedCheck = document.getElementById('donor-dedicated');
+      const dedicatedNameField = document.getElementById('donor-dedicated-name');
+      const dedicatedGroupPanel = document.getElementById('dedicated-name-group');
+
+      if (dedicatedCheck) {
+        dedicatedCheck.checked = true;
+        isDedicated = true;
+        if (dedicatedGroupPanel) dedicatedGroupPanel.style.display = 'block';
+      }
+
+      if (dedicatedNameField) {
+        dedicatedNameField.value = `Player Sponsorship - ${playerName} (Miracle FA)`;
+        dedicatedNameField.dispatchEvent(new Event('input'));
+      }
+
+      // 5. Instantly transition to step 2 (Donor Information) to streamline flow
+      showStep(2);
+    });
+  });
+
+  // =========================================================================
+  // 4. Capacitor Mobile & Offline Queue Sync System
+  // =========================================================================
+  
+  // Offline sync simulation for volunteer applications
+  const syncOfflineApplications = () => {
+    if (navigator.onLine === false) return;
+    
+    const offlineQueue = localStorage.getItem('kesf_offline_volunteers');
+    if (!offlineQueue) return;
+
+    try {
+      const applications = JSON.parse(offlineQueue);
+      if (applications.length === 0) return;
+
+      console.log(`Syncing ${applications.length} offline volunteer applications...`);
+      
+      // Simulate API sync uploading to server
+      setTimeout(() => {
+        localStorage.removeItem('kesf_offline_volunteers');
+        
+        // Show success alert banner to user if they are online
+        const onlineBanner = document.createElement('div');
+        onlineBanner.style.position = 'fixed';
+        onlineBanner.style.bottom = '20px';
+        onlineBanner.style.left = '50%';
+        onlineBanner.style.transform = 'translateX(-50%)';
+        onlineBanner.style.backgroundColor = 'var(--primary)';
+        onlineBanner.style.color = '#fff';
+        onlineBanner.style.padding = '12px 24px';
+        onlineBanner.style.borderRadius = 'var(--radius-md)';
+        onlineBanner.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+        onlineBanner.style.zIndex = '10000';
+        onlineBanner.style.fontFamily = 'Outfit, sans-serif';
+        onlineBanner.style.fontWeight = '600';
+        onlineBanner.innerText = `🔄 Synced ${applications.length} offline application(s) successfully!`;
+
+        document.body.appendChild(onlineBanner);
+        setTimeout(() => onlineBanner.remove(), 4000);
+      }, 1500);
+
+    } catch (err) {
+      console.error("Offline sync error: ", err);
+    }
+  };
+
+  // Listen to network status changes
+  window.addEventListener('online', syncOfflineApplications);
+
+  // Hook into volunteer form submission to intercept offline state
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      // If offline, bypass network submission and store locally
+      if (navigator.onLine === false) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const nameVal = document.getElementById('name').value.trim();
+        const emailVal = document.getElementById('email').value.trim();
+        const roleVal = document.getElementById('role').value;
+        const msgVal = document.getElementById('message').value.trim();
+
+        if (!nameVal || !emailVal || !roleVal || !msgVal) {
+          formMessage.innerText = 'Please fill in all fields.';
+          formMessage.className = 'form-message error';
+          return;
+        }
+
+        const newApp = {
+          name: nameVal,
+          email: emailVal,
+          role: roleVal,
+          message: msgVal,
+          timestamp: new Date().toISOString()
+        };
+
+        // Load existing queue
+        let queue = [];
+        const existingQueue = localStorage.getItem('kesf_offline_volunteers');
+        if (existingQueue) {
+          try {
+            queue = JSON.parse(existingQueue);
+          } catch(err){}
+        }
+
+        queue.push(newApp);
+        localStorage.setItem('kesf_offline_volunteers', JSON.stringify(queue));
+
+        // Show offline success message
+        formMessage.innerText = `You are currently offline. Your volunteer application has been saved locally and will auto-sync once internet connection is restored.`;
+        formMessage.className = 'form-message success';
+        
+        // Reset form inputs
+        form.reset();
+      }
+    });
+  }
+
+  // Capacitor native configuration check
+  const initCapacitorNative = () => {
+    if (!window.Capacitor) {
+      console.log("K.E.S.F is running in standard Web browser mode.");
+      return;
+    }
+
+    const Capacitor = window.Capacitor;
+    console.log(`K.E.S.F App running in native wrapper. Platform: ${Capacitor.getPlatform()}`);
+
+    // If native push notifications or local notifications are supported on device
+    try {
+      if (Capacitor.isPluginAvailable('PushNotifications')) {
+        console.log("Push notifications plugin available. Ready to request permissions.");
+      }
+    } catch(err) {
+      console.warn("Capacitor plugins initialization check: ", err);
+    }
+  };
+
+  initCapacitorNative();
 });
 

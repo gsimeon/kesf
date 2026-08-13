@@ -2802,5 +2802,314 @@ textarea.form-control {
   margin-left: 6px;
 }
 
+/* =========================================================================
+   Interactive GIS Map Styles
+   ========================================================================= */
+.outreach-map-container {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  padding: 12px;
+}
+
+#impact-map {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  z-index: 1; /* Keep leaflet panes below header navigation */
+  background-color: var(--bg-secondary);
+}
+
+/* Leaflet Customizations to match dark/light theme */
+.leaflet-container {
+  font-family: 'Inter', sans-serif !important;
+  color: var(--text-primary) !important;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 4px 20px var(--glass-shadow) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-content h4 {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 4px !important;
+  color: var(--primary) !important;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 4px 12px var(--glass-shadow) !important;
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  transition: background var(--transition-fast) !important;
+}
+
+.leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+  background-color: var(--glass-border) !important;
+  color: var(--primary) !important;
+}
+
+.leaflet-bar {
+  border: none !important;
+}
+
+/* Adjust main header z-index to stay on top of map controls */
+.header {
+  z-index: 1000 !important;
+}
+#scroll-progress {
+  z-index: 1001 !important;
+}
+.donation-overlay {
+  z-index: 1010 !important;
+}
+
+/* =========================================================================
+   Player Sponsorship Portal Styles
+   ========================================================================= */
+.academy-players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+
+.player-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.player-photo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.player-placeholder-avatar {
+  font-size: 4rem;
+  user-select: none;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+}
+
+.player-status-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 2;
+  border: 1px solid var(--glass-border);
+}
+
+.player-status-badge.available {
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+
+.player-status-badge.sponsored {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--primary);
+}
+
+.player-info-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.player-name {
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.player-meta-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.player-stat-tag {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 2px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.player-bio {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.player-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--glass-border);
+  gap: 8px;
+}
+
+.sponsorship-cost {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.sponsor-player-btn {
+  padding: 8px 18px;
+  font-size: 0.82rem;
+}
+
+/* =========================================================================
+   Financial Transparency Styles
+   ========================================================================= */
+.transparency-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 992px) {
+  .transparency-grid {
+    grid-template-columns: 1fr;
+  }
+  .outreach-map-container {
+    height: 380px;
+  }
+}
+
+.chart-card {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-title {
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.chart-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 24px;
+  max-width: 80%;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-legend-custom {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.trust-badges-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.trust-badge {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge-icon-custom {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+.trust-badge h4 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.trust-badge p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  max-width: 240px;
+}
+
+
 
 
