@@ -125,11 +125,31 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
 
   reveals.forEach(reveal => revealObserver.observe(reveal));
+
+  // Immediate visibility check for elements already in or near viewport
+  const checkInitialVisibility = () => {
+    reveals.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+        el.classList.add('active');
+      }
+    });
+  };
+  checkInitialVisibility();
+  window.addEventListener('scroll', checkInitialVisibility, { passive: true });
+  window.addEventListener('hashchange', () => {
+    setTimeout(checkInitialVisibility, 100);
+  });
+  // Fallback safety: ensure all content becomes visible within 1.5s
+  setTimeout(() => {
+    reveals.forEach(el => el.classList.add('active'));
+  }, 1500);
 
   // --- Outreach Carousel / Slideshow ---
   const track = document.getElementById('carousel-track');
@@ -901,6 +921,24 @@ document.addEventListener('DOMContentLoaded', () => {
   academyItems.forEach((item, idx) => {
     item.addEventListener('click', () => {
       openLightbox(academyItems, idx);
+    });
+  });
+
+  // Register click listeners for outreach field gallery
+  const outreachItems = Array.from(document.querySelectorAll('#outreach-gallery .gallery-item'));
+  outreachItems.forEach((item, idx) => {
+    item.addEventListener('click', () => {
+      openLightbox(outreachItems, idx);
+    });
+  });
+
+  // Register click listeners for outreach carousel cards
+  const outreachCardImgs = Array.from(document.querySelectorAll('.outreach-card .outreach-img'));
+  outreachCardImgs.forEach((imgWrap, idx) => {
+    imgWrap.style.cursor = 'pointer';
+    imgWrap.setAttribute('title', 'Click to view full photo');
+    imgWrap.addEventListener('click', () => {
+      openLightbox(outreachCardImgs, idx);
     });
   });
 
