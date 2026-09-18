@@ -298,6 +298,33 @@ img {
   filter: drop-shadow(0 6px 14px rgba(16, 185, 129, 0.55));
 }
 
+/* Official Logo Banner Image */
+.logo-banner-wrap {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.logo-banner-img {
+  height: 52px;
+  width: auto;
+  max-width: 250px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--glass-border);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+}
+
+.logo-banner-wrap:hover .logo-banner-img {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+  filter: brightness(1.05);
+}
+
 .logo-icon {
   width: 40px;
   height: 40px;
@@ -1184,6 +1211,11 @@ textarea.form-control {
     --nav-height: 70px;
   }
   
+  .logo-banner-img {
+    height: 42px;
+    max-width: 175px;
+  }
+  
   .section {
     padding: 60px 0;
   }
@@ -1210,6 +1242,16 @@ textarea.form-control {
     flex-direction: column;
     gap: 16px;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-banner-img {
+    height: 38px;
+    max-width: 150px;
+  }
+  .nav-actions {
+    gap: 10px;
   }
 }
 
