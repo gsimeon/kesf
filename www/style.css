@@ -482,6 +482,30 @@ img {
   animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
+.hero-banner-wrap {
+  display: block;
+  max-width: 540px;
+  width: 100%;
+  margin-bottom: 24px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--glass-border);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.hero-banner-wrap:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(16, 185, 129, 0.25);
+}
+
+.hero-banner-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
 .hero-tagline {
   display: inline-flex;
   align-items: center;
@@ -1150,6 +1174,11 @@ textarea.form-control {
   
   .hero-desc {
     margin: 0 auto 40px;
+  }
+  
+  .hero-banner-wrap {
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .hero-buttons {
