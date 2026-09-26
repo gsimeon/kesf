@@ -4,6 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "powershell -ExecutionPolicy Bypass -File ./serve.ps1",
+    "build": "node ./scripts/package-site.js",
+    "package": "node ./scripts/package-site.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

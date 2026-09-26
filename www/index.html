@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <meta property="og:image" content="assets/logo-badge.png">
-  <link rel="stylesheet" href="style.css?v=1.1">
+  <link rel="stylesheet" href="style.css?v=1.3">
   <!-- Leaflet Map CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
@@ -488,11 +488,17 @@
       </div>
 
       <!-- Interactive GIS Outreach Map -->
-      <div class="outreach-map-title reveal" style="margin-top: 60px; text-align: center; margin-bottom: 24px;">
+      <div class="outreach-map-title reveal" style="margin-top: 60px; text-align: center; margin-bottom: 20px;">
         <h3 style="font-size: 1.8rem; margin-bottom: 8px;">Interactive GIS Outreach Map</h3>
         <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 0.95rem;">
-          Track our active humanitarian hubs and distribution centers across Nigeria. Click on any marker to view hub details.
+          Track our active humanitarian hubs and distribution centers across Nigeria. Click on any marker or quick-jump button to view hub details.
         </p>
+        <div class="map-hub-filters" id="map-hub-filters">
+          <button class="map-filter-btn active" data-hub="all">📍 All Locations</button>
+          <button class="map-filter-btn" data-hub="surulere">⚽ Miracle FA Surulere</button>
+          <button class="map-filter-btn" data-hub="ibadan">🏛️ Ibadan Headquarters</button>
+          <button class="map-filter-btn" data-hub="lagos-island">🩺 Lagos Island Outreach</button>
+        </div>
       </div>
       <div class="outreach-map-container glass-card reveal" style="margin-top: 10px;">
         <div id="impact-map"></div>
@@ -1065,10 +1071,31 @@
             We encourage, improve, and promote benevolence support, educational growth, social welfare, and economic development of everyone we cross paths with.
           </p>
           <div class="social-links">
-            <a href="https://wa.me/2348100447873" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">W</a>
-            <a href="#" class="social-btn" aria-label="Facebook">F</a>
-            <a href="#" class="social-btn" aria-label="Twitter">T</a>
-            <a href="#" class="social-btn" aria-label="Instagram">I</a>
+            <a href="https://www.tiktok.com/@kikefoundation" target="_blank" rel="noopener noreferrer" class="social-btn social-tiktok" aria-label="TikTok" title="Follow K.E.S.F on TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.86 4.46 6.3 6.3 0 0 0 1.93-4.57V8.58a8.28 8.28 0 0 0 4.8 1.54V6.69z"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/kike_foundation?igsh=YmY3N2tpa2NsYmRz&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-btn social-instagram" aria-label="Instagram" title="Follow K.E.S.F on Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="https://x.com/kikefoundation?s=11" target="_blank" rel="noopener noreferrer" class="social-btn social-x" aria-label="X (formerly Twitter)" title="Follow K.E.S.F on X">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://www.youtube.com/@kikefoundatio" target="_blank" rel="noopener noreferrer" class="social-btn social-youtube" aria-label="YouTube" title="Subscribe to K.E.S.F on YouTube">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+            <a href="https://wa.me/2348100447873" target="_blank" rel="noopener noreferrer" class="social-btn social-whatsapp" aria-label="WhatsApp" title="Chat with K.E.S.F on WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.031 0C5.397 0 .012 5.385.012 12.019c0 2.118.552 4.185 1.6 6.007L0 24l6.166-1.616c1.769.965 3.766 1.474 5.865 1.474 6.634 0 12.019-5.385 12.019-12.019C24.05 5.385 18.665 0 12.031 0zm0 21.996c-1.802 0-3.566-.484-5.105-1.398l-.366-.217-3.791.994 1.012-3.693-.238-.379c-1.006-1.603-1.536-3.46-1.536-5.284 0-5.525 4.494-10.019 10.024-10.019 5.53 0 10.024 4.494 10.024 10.019 0 5.525-4.494 10.019-10.024 10.019zm5.497-7.503c-.301-.151-1.782-.88-2.059-.98-.276-.1-.477-.151-.678.151-.201.301-.779.98-.955 1.181-.176.201-.352.226-.653.075-.301-.151-1.272-.469-2.423-1.496-.895-.798-1.5-1.784-1.676-2.085-.176-.301-.019-.464.132-.614.136-.135.301-.352.452-.527.151-.176.201-.301.301-.502.101-.201.05-.377-.025-.527-.075-.151-.678-1.632-.929-2.235-.245-.588-.493-.508-.678-.518l-.578-.01c-.201 0-.527.075-.803.377-.276.301-1.054 1.03-1.054 2.511 0 1.481 1.079 2.911 1.23 3.112.151.201 2.124 3.244 5.147 4.551.719.311 1.28.497 1.718.636.722.229 1.378.197 1.897.12.578-.086 1.782-.728 2.033-1.431.251-.703.251-1.306.176-1.431-.075-.125-.276-.201-.577-.352z"/>
+              </svg>
+            </a>
           </div>
         </div>
         

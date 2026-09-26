@@ -1002,58 +1002,125 @@ document.addEventListener('DOMContentLoaded', () => {
   const mapElement = document.getElementById('impact-map');
   let currentMap = null;
   let mapTileLayer = null;
-
-  const getMapTileUrl = (theme) => {
-    // Return dark or light tiles matching theme
-    return theme === 'light'
-      ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
-      : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
-  };
+  const hubMarkers = {};
 
   const initImpactMap = () => {
     if (!mapElement) return;
 
-    // Create Leaflet map centered at Lagos/Ibadan
+    // Create Leaflet map centered at Lagos/Ibadan region
     currentMap = L.map('impact-map', {
-      center: [7.15, 3.75], // Center zoom between Lagos and Ibadan
-      zoom: 7,
+      center: [6.95, 3.70], // Perfectly framed between Lagos & Ibadan
+      zoom: 8,
+      minZoom: 6,
+      maxZoom: 18,
       scrollWheelZoom: false
     });
 
-    const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-    mapTileLayer = L.tileLayer(getMapTileUrl(activeTheme), {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
+    // Use OpenStreetMap tiles - completely open source, zero API keys required
+    mapTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+      subdomains: ['a', 'b', 'c'],
+      maxZoom: 19
     }).addTo(currentMap);
 
     // Active K.E.S.F hubs coordinates and content
     const hubs = [
       {
-        coords: [6.5020, 3.3582], // Surulere
+        id: 'surulere',
+        coords: [6.5020, 3.3582], // Surulere, Lagos
         title: 'Miracle FA Surulere Hub',
-        desc: '<strong>Football Academy Hub</strong><br>Over 50 youth players enrolled. Free gear, nutrition, and professional drills training.',
-        color: 'indigo'
+        badge: 'Football Academy & Youth Sports',
+        desc: 'Over 50 grassroots youth players enrolled. Free gear, nutrition packs, and professional coaching drills under Coach Tunde.',
+        color: '#4f46e5',
+        glow: 'rgba(79, 70, 229, 0.45)',
+        icon: '⚽'
       },
       {
+        id: 'ibadan',
         coords: [7.3775, 3.9470], // Ibadan (Odo-Ona Kekere)
         title: 'K.E.S.F Headquarters & Outreach Center',
-        desc: '<strong>Main Headquarters</strong><br>Administrative center, vocational training hubs, and monthly food relief campaigns.',
-        color: 'emerald'
+        badge: 'National Headquarters & Skills Depot',
+        desc: 'Central administrative offices, vocational skills training center, and monthly grassroots food relief campaign staging ground.',
+        color: '#10b981',
+        glow: 'rgba(16, 185, 129, 0.45)',
+        icon: '🏛️'
       },
       {
+        id: 'lagos-island',
         coords: [6.4549, 3.4246], // Lagos Island
-        title: 'Lagos Outreach Base',
-        desc: '<strong>Welfare & Health Base</strong><br>Annual back-to-school drives and medical clinics distribution center.',
-        color: 'gold'
+        title: 'Lagos Outreach & Welfare Base',
+        badge: 'Welfare, Health & Back-to-School',
+        desc: 'Annual education supply drives, widow emergency subsidies, and free community medical testing clinic distribution point.',
+        color: '#f59e0b',
+        glow: 'rgba(245, 158, 11, 0.45)',
+        icon: '🩺'
       }
     ];
 
-    // Add markers with custom style and bind popups
+    // Helper to generate glowing modern marker
+    const createHubIcon = (hub) => {
+      return L.divIcon({
+        className: 'custom-map-marker',
+        html: `
+          <div class="map-marker-pin" style="--pin-bg: ${hub.color}; --pin-glow: ${hub.glow};" title="${hub.title}">
+            <span class="marker-emoji">${hub.icon}</span>
+            <div class="map-marker-pulse"></div>
+          </div>
+        `,
+        iconSize: [38, 38],
+        iconAnchor: [19, 19],
+        popupAnchor: [0, -22]
+      });
+    };
+
+    // Add markers with custom style and bind rich popups
     hubs.forEach(hub => {
-      const marker = L.marker(hub.coords).addTo(currentMap);
-      marker.bindPopup(`<h4>${hub.title}</h4><p>${hub.desc}</p>`);
+      const marker = L.marker(hub.coords, { icon: createHubIcon(hub) }).addTo(currentMap);
+      const popupHtml = `
+        <div class="hub-popup">
+          <span class="popup-badge" style="background: ${hub.color}22; color: ${hub.color}; border: 1px solid ${hub.color}44;">
+            ${hub.badge}
+          </span>
+          <h4>${hub.icon} ${hub.title}</h4>
+          <p>${hub.desc}</p>
+        </div>
+      `;
+      marker.bindPopup(popupHtml, { maxWidth: 300 });
+      hubMarkers[hub.id] = marker;
     });
+
+    // Wire up map filter buttons
+    const filterButtons = document.querySelectorAll('.map-filter-btn');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const hubId = btn.getAttribute('data-hub');
+        if (hubId === 'all') {
+          currentMap.closePopup();
+          currentMap.flyTo([6.95, 3.70], 8, { duration: 1.2 });
+        } else if (hubMarkers[hubId]) {
+          const targetHub = hubs.find(h => h.id === hubId);
+          if (targetHub) {
+            currentMap.flyTo(targetHub.coords, 14, { duration: 1.2 });
+            setTimeout(() => {
+              hubMarkers[hubId].openPopup();
+            }, 1200);
+          }
+        }
+      });
+    });
+
+    // Invalidate size once visible so tiles never render broken or gray
+    const mapObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && currentMap) {
+          currentMap.invalidateSize();
+        }
+      });
+    }, { threshold: 0.1 });
+    mapObserver.observe(mapElement);
   };
 
   // Safe initialize map on load
@@ -1064,27 +1131,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch (err) {
     console.error("Map initialization failed: ", err);
   }
-
-  // Update map tiles dynamically when theme changes
-  const updateMapTheme = (theme) => {
-    if (mapTileLayer && currentMap) {
-      currentMap.removeLayer(mapTileLayer);
-      mapTileLayer = L.tileLayer(getMapTileUrl(theme), {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 20
-      }).addTo(currentMap);
-    }
-  };
-
-  // Intercept theme toggle click to refresh map style
-  themeToggle.addEventListener('click', () => {
-    // Wait for the DOM theme attribute change
-    setTimeout(() => {
-      const currentTheme = htmlElement.getAttribute('data-theme');
-      updateMapTheme(currentTheme);
-    }, 20);
-  });
 
   // =========================================================================
   // 2. Financial Transparency Dashboard (Chart.js)
