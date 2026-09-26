@@ -19,8 +19,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Path on the server where your website files live (usually public_html/ or public_html/subfolder/)
-          server-dir: ${{ secrets.FTP_DIR || 'public_html/' }}
+          # Path on the server (use ./ if your FTP account is already rooted in public_html)
+          server-dir: ${{ secrets.FTP_DIR || './' }}
           # Local folder in your repo to upload
           local-dir: ./www/
           dangerous-clean-slate: false
